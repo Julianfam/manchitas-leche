@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --manchitas-green: #14532d;
+  --manchitas-light: #4ade80;
+  --manchitas-cream: #fefce8;
+}
+
+body {
+  font-feature-settings: "kern" "liga" "tnum";
+}
+
+/* Nice buttons */
+.btn-primary {
+  @apply bg-[#14532d] hover:bg-[#166534] text-white font-semibold py-3 px-8 rounded-full transition-all active:scale-[0.985] flex items-center justify-center gap-2;
+}
+
+.btn-whatsapp {
+  @apply bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-3 px-8 rounded-full transition-all flex items-center justify-center gap-2 shadow-lg;
+}
+
+/* Product card */
+.product-card {
+  @apply bg-white rounded-3xl shadow-xl border border-[#14532d]/10 overflow-hidden;
+}
+
+/* Step cards for conservation */
+.step-card {
+  @apply bg-white rounded-2xl p-6 border border-[#14532d]/10 hover:shadow-md transition-shadow;
+}
+
+/* Testimonial */
+.testimonial {
+  @apply bg-white p-6 rounded-2xl border border-[#14532d]/10;
+}
+
+/* FAQ */
+ details summary {
+  @apply cursor-pointer font-medium text-[#14532d] flex justify-between items-center;
+}
+
+details[open] summary {
+  @apply mb-3;
+}
+
+/* Limited badge */
+.limited-badge {
+  @apply inline-flex items-center gap-1.5 bg-[#14532d] text-white text-xs font-bold px-3 py-1 rounded-full;
+}

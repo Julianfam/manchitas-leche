@@ -11,8 +11,9 @@ export type HeroSlide = {
   description: string;
   image: string;
   imageAlt: string;
+  imagePosition?: string;
   ctaLabel: string;
-  ctaAction: "product" | "whatsapp" | "cheese";
+  ctaAction: "product" | "whatsapp" | "cheese" | "conservation";
 };
 
 type HeroCarouselProps = {
@@ -52,6 +53,11 @@ export default function HeroCarousel({ slides, onWhatsApp }: HeroCarouselProps) 
 
     if (action === "cheese") {
       document.getElementById("queso")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+
+    if (action === "conservation") {
+      document.getElementById("conservacion")?.scrollIntoView({ behavior: "smooth" });
       return;
     }
 
@@ -105,11 +111,12 @@ export default function HeroCarousel({ slides, onWhatsApp }: HeroCarouselProps) 
                     </div>
                   </div>
 
-                  <div className="order-1 md:order-2 relative">
+                  <div className="order-1 md:order-2 relative bg-white/10 rounded-3xl p-2">
                     <img
                       src={slide.image}
                       alt={slide.imageAlt}
-                      className="rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
+                      className="rounded-2xl shadow-2xl w-full object-cover aspect-[4/3] bg-[#fefce8]"
+                      style={{ objectPosition: slide.imagePosition ?? "center" }}
                     />
                   </div>
                 </div>

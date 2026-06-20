@@ -1,7 +1,44 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Milk, Users, Award, Clock, Truck, Heart, ArrowRight, Phone, Star, Check } from 'lucide-react';
+import { Milk, Users, Award, Clock, Heart, ArrowRight, Phone, Star, Check } from 'lucide-react';
+import HeroCarousel, { type HeroSlide } from '../components/HeroCarousel';
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: "leche-organica",
+    badge: "PRODUCCIÓN LIMITADA • FINCAS COLOMBIANAS ORGÁNICAS",
+    title: "Leche Orgánica\nManchitas",
+    subtitle: "Leche de verdad, para tu familia.",
+    description: "100% de vaca orgánica. Sin rebajar. Sin mezclas. Sabor y cremosidad natural que sí se nota.",
+    image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80",
+    imageAlt: "Vaca feliz en pasto verde de finca orgánica colombiana",
+    ctaLabel: "Ver el producto",
+    ctaAction: "product",
+  },
+  {
+    id: "cantina-5l",
+    badge: "SOLO $7.000 EL LITRO",
+    title: "Cantina de\n5 litros",
+    subtitle: "Fresca de finca, directo a tu mesa.",
+    description: "Leche cruda orgánica en cantina plástica de 5 litros. Ideal para toda la familia.",
+    image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=800&q=80",
+    imageAlt: "Cantina de leche orgánica fresca Manchitas",
+    ctaLabel: "Hacer mi pedido",
+    ctaAction: "whatsapp",
+  },
+  {
+    id: "queso-proximo",
+    badge: "PRÓXIMAMENTE",
+    title: "Queso en Bloque\nOrgánico",
+    subtitle: "El mismo sabor natural de siempre.",
+    description: "Muy pronto: queso fresco, doble crema y campesino. Reserva tu interés hoy.",
+    image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=800&q=80",
+    imageAlt: "Queso orgánico artesanal colombiano",
+    ctaLabel: "Ver quesos",
+    ctaAction: "cheese",
+  },
+];
 
 export default function ManchitasLeche() {
   const [quantity, setQuantity] = useState(1);
@@ -17,7 +54,7 @@ export default function ManchitasLeche() {
     let message = customMessage;
     
     if (!message) {
-      message = `Hola Manchitas! \ud83d\udc04 Quiero pedir ${quantity} cantina(s) de Leche Orgánica Manchitas de 5L.\n\nTotal: $${formatCOP(total)} COP\n\n\u00bfMe confirmas disponibilidad y detalles de entrega en Bogot\u00e1 o Cundinamarca?`;
+      message = `Hola Manchitas! 🐄 Quiero pedir ${quantity} cantina(s) de Leche Orgánica Manchitas de 5L.\n\nTotal: $${formatCOP(total)} COP\n\n¿Me confirmas disponibilidad y detalles de entrega en Bogotá o Cundinamarca?`;
     }
     
     const encodedMessage = encodeURIComponent(message);
@@ -25,7 +62,7 @@ export default function ManchitasLeche() {
   };
 
   const openCheeseInterest = (cheeseType: string) => {
-    const message = `Hola Manchitas! \ud83e\uddc0 Estoy muy interesado en el ${cheeseType} en bloque cuando salga a la venta. \u00bfMe avisas cuando est\u00e9 disponible?`;
+    const message = `Hola Manchitas! 🧀 Estoy muy interesado en el ${cheeseType} en bloque cuando salga a la venta. ¿Me avisas cuando esté disponible?`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/573005695045?text=${encodedMessage}`, '_blank');
   };
@@ -37,7 +74,7 @@ export default function ManchitasLeche() {
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-20">
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 bg-[#14532d] rounded-full flex items-center justify-center">
-              <span className="text-white text-2xl">\ud83d\udc04</span>
+              <span className="text-white text-2xl" aria-hidden="true">🐄</span>
             </div>
             <div>
               <div className="font-bold text-2xl tracking-tighter text-[#14532d]">MANCHITAS</div>
@@ -61,57 +98,15 @@ export default function ManchitasLeche() {
         </div>
       </nav>
 
-      {/* Hero with image */}
-      <section className="pt-20 pb-16 md:pt-24 md:pb-20 bg-gradient-to-b from-[#14532d] to-[#166534] text-white relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold tracking-[2px] px-4 py-1.5 rounded-full mb-6">
-              PRODUCCIÓN LIMITADA • FINCAS COLOMBIANAS ORGÁNICAS
-            </div>
-            
-            <h1 className="text-6xl md:text-7xl font-bold tracking-tighter mb-4">
-              Leche Orgánica<br />Manchitas
-            </h1>
-            <p className="text-2xl md:text-3xl font-light text-white/90 mb-3">Leche de verdad, para tu familia.</p>
-            <p className="max-w-md text-white/80 text-lg mb-8">
-              100% de vaca orgánica. Sin rebajar. Sin mezclas. Sabor y cremosidad natural que sí se nota.
-            </p>
+      <HeroCarousel slides={HERO_SLIDES} onWhatsApp={() => openWhatsApp()} />
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => document.getElementById('producto')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-[#14532d] font-semibold px-10 py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#fefce8] transition-all text-lg"
-              >
-                Ver el producto <ArrowRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => openWhatsApp()}
-                className="btn-whatsapp text-lg px-10 py-4"
-              >
-                Pedir ahora por WhatsApp
-              </button>
-            </div>
-
-            <div className="mt-8 flex gap-8 text-sm text-white/70">
-              <div className="flex items-center gap-2"><Check className="w-4 h-4" /> 5 litros por cantina</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4" /> Solo $7.000 el litro</div>
-            </div>
-          </div>
-
-          {/* Hero Image */}
-          <div className="relative mt-10 md:mt-0">
-            <img 
-              src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800&q=80" 
-              alt="Vaca feliz en pasto verde de finca orgánica colombiana" 
-              className="rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
-            />
-            <div className="absolute -bottom-4 -left-4 bg-white text-[#14532d] px-6 py-3 rounded-2xl shadow-xl">
-              <div className="font-bold">100% Orgánica</div>
-              <div className="text-sm text-[#14532d]/70">Directo de la finca</div>
-            </div>
-          </div>
+      <div className="bg-[#166534] text-white py-4">
+        <div className="max-w-5xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 gap-y-2 text-sm text-white/80 font-medium">
+          <div className="flex items-center gap-2"><Check className="w-4 h-4" /> 5 litros por cantina</div>
+          <div className="flex items-center gap-2"><Check className="w-4 h-4" /> Solo $7.000 el litro</div>
+          <div className="flex items-center gap-2"><Check className="w-4 h-4" /> 100% Orgánica</div>
         </div>
-      </section>
+      </div>
 
       {/* Trust bar */}
       <div className="border-b border-[#14532d]/10 bg-white py-4">
@@ -275,7 +270,7 @@ export default function ManchitasLeche() {
               <p className="text-[#14532d]/70 mt-1">El mismo compromiso con la calidad natural orgánica. Muy pronto en tu mesa.</p>
             </div>
             <button 
-              onClick={() => openWhatsApp("Hola Manchitas! \ud83e\uddc0 ¡Quiero que me avises cuando salga el queso en bloque orgánico a la venta!")}
+              onClick={() => openWhatsApp("Hola Manchitas! 🧀 ¡Quiero que me avises cuando salga el queso en bloque orgánico a la venta!")}
               className="btn-primary text-sm px-6 py-3 self-start md:self-auto"
             >
               Avísame cuando salga

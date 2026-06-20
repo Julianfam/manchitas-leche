@@ -19,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <meta charSet="utf-8" />
+      </head>
       <body className={`${inter.className} bg-[#fefce8] text-[#0f172a]`}>
         {children}
       </body>

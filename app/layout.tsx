@@ -5,8 +5,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Leche Entera Manchitas | Leche Cruda Fresca 100% de Vaca",
-  description: "Leche entera 100% de vaca, sin rebajar ni mezclar. Cantinas de 5 litros frescas de finca. Sabor y cremosidad natural para tu familia. Producción limitada en Colombia. Pedidos por WhatsApp.",
+  title: "Leche Orgánica Manchitas | Leche Cruda Fresca 100% de Vaca",
+  description: "Leche orgánica entera 100% de vaca, sin rebajar ni mezclar. Cantinas de 5 litros frescas de finca. Sabor y cremosidad natural para tu familia. Producción limitada en Colombia. Pedidos por WhatsApp.",
   icons: {
     icon: "/favicon.ico",
   },
